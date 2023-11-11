@@ -27,9 +27,10 @@ function toggleFullscreen() {
 function toggleEditing() {
   presentationStore.setEditing(!editing.value);
 }
+const currentPresentation = computed(() => presentationStore.currentPresentation);
 </script>
 <template>
-  <div class="tool-bar">
+  <div class="tool-bar" v-if="currentPresentation">
     <div class="left">
       <div class="pages">
         {{ page }} / {{ total }}
