@@ -48,7 +48,6 @@ export const usePresentationStore = defineStore("presentation", {
       this.fullscreen = fullscreen;
     },
     setCursor(cursor: boolean) {
-      console.log({ cursor });
       this.cursor = cursor;
     },
     async create(params: Presentation) {

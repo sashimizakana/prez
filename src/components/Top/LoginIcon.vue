@@ -4,10 +4,12 @@ import { useClientStore } from "@/store/client";
 import { useAuth0 } from '@auth0/auth0-vue';
 const { isAuthenticated, loginWithRedirect, getAccessTokenSilently, getAccessTokenWithPopup } = useAuth0();
 const clientStore = useClientStore();
+console.log(import.meta.env.VITE_AUTH0_AUDIENCE);
 async function login() {
   loginWithRedirect({
     authorizationParams: {
-      audience: import.meta.env.VITE_AUTH0_AUDIENCE
+      audience: import.meta.env.VITE_AUTH0_AUDIENCE,
+      redirect_uri: window.location.origin
     }
   });
 }
@@ -36,7 +38,6 @@ async function getToken() {
   clientStore.setToken(token);
 }
 watch(isAuthenticated, async (value) => {
-  console.log({ value })
   if (value) {
     await getToken();
   }
