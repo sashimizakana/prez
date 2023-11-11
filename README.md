@@ -14,3 +14,9 @@ AUTH0_SECRET={APIs で作った API の secret}
 VITE_AUTH0_DOMAIN={Auth0 の自ドメイン}
 VITE_AUTH0_CLIENT_ID={Auth0 の Application の ID}
 VITE_AUTH0_AUDIENCE={Auth0 の API の aud}
+
+# 開発
+
+npx wrangler pages dev -- vite
+
+# デプロイ
