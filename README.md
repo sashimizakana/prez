@@ -17,6 +17,8 @@ VITE_AUTH0_AUDIENCE={Auth0 の API の aud}
 
 # 開発
 
-npx wrangler pages dev -- vite
+npm run dev
 
 # デプロイ
+
+master にプッシュするとデプロイされる
