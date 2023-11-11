@@ -26,7 +26,7 @@ export const usePresentationStore = defineStore("presentation", {
     currentPresentation(state): Presentation | undefined {
       return state.presentations.find((p) => p.id === state.currentId);
     },
-    currentPages(state): number {
+    currentPages(): number {
       if (!this.currentPresentation) {
         return 0;
       }
