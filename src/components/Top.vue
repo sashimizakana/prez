@@ -44,10 +44,10 @@ const name = computed(() => {
       </div>
       <div class="right">
         <template v-if="authorized">
-          <el-button link type="primary" @click="edit">
+          <el-button v-if="currentPresentation" link type="primary" @click="edit">
             <font-awesome-icon icon="pen" link />
           </el-button>
-          <el-button v-if="currentPresentation" @click="add" link type="primary">
+          <el-button @click="add" link type="primary">
             <font-awesome-icon icon="plus" link />
           </el-button>
         </template>
