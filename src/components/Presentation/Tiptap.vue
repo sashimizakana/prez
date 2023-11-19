@@ -71,7 +71,7 @@ watch(modelValue, (v) => {
 .ProseMirror {
   height: 100%;
   outline: none;
-  font-size: 20pt;
+  font-size: 26pt;
   line-height: 1;
 }
 
