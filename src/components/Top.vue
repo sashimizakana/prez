@@ -81,6 +81,7 @@ const name = computed(() => {
 
 .content {
   flex-grow: 1;
+  overflow: auto;
 }
 
 .tool {
