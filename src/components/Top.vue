@@ -68,6 +68,7 @@ const name = computed(() => {
   height: 100%;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .navigation {
@@ -77,6 +78,7 @@ const name = computed(() => {
   align-items: center;
   padding: 0 0.5rem;
   justify-content: space-between;
+  flex-shrink: 0;
 }
 
 .content {
