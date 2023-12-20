@@ -1,6 +1,6 @@
 # PREZ
 
-自分の動画用 Cloudflare Pages において Functions 経由で D1 にアクセスするやつ。  
+プレゼンぽいものを作れる Cloudflare Pages において Functions 経由で D1 にアクセスするやつ。  
 一応自分だけ Auth0 ログインして、書き込めるのは自分だけになっている。
 
 # 設定
