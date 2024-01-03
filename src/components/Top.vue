@@ -57,7 +57,7 @@ const name = computed(() => {
     <div class="content">
       <router-view />
     </div>
-    <div class="tool" v-if="authorized">
+    <div class="tool">
       <tool-bar></tool-bar>
     </div>
     <presentation-name-dialog v-model="presentation"></presentation-name-dialog>

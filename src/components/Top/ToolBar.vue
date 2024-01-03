@@ -2,9 +2,11 @@
 import dayjs from "dayjs";
 import { ref, computed } from "vue";
 import { usePresentationStore } from "@/store/presentation";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
+import { useClientStore } from "@/store/client";
 
 const route = useRoute();
+const router = useRouter();
 const presentationStore = usePresentationStore();
 const now = ref(dayjs());
 const date = computed(() => now.value.format("YYYY年MM月DD日(ddd) HH:mm:ss"));
@@ -28,6 +30,15 @@ function toggleEditing() {
   presentationStore.setEditing(!editing.value);
 }
 const currentPresentation = computed(() => presentationStore.currentPresentation);
+const clientStore = useClientStore();
+const authorized = computed(() => clientStore.authorized);
+function move(offset: number) {
+  router.push({
+    query: {
+      page: page.value + offset - 1
+    }
+  });
+}
 </script>
 <template>
   <div class="tool-bar" v-if="currentPresentation">
@@ -36,16 +47,22 @@ const currentPresentation = computed(() => presentationStore.currentPresentation
         {{ page }} / {{ total }}
       </div>
       <div class="buttons">
+        <el-button type="primary" link @click="move(-1)" :disabled="page === 1">
+          <font-awesome-icon :icon="['fas', 'arrow-left']" />
+        </el-button>
+        <el-button type="primary" link @click="move(1)" :disabled="page === total">
+          <font-awesome-icon :icon="['fas', 'arrow-right']" />
+        </el-button>
         <el-button :type="cursor ? 'danger' : 'primary'" link @click="toggleCursor">
           <font-awesome-icon :icon="['fas', 'arrow-pointer']" />
         </el-button>
-        <el-button :type="editing ? 'danger' : 'primary'" link @click="toggleEditing()">
+        <el-button :type="editing ? 'danger' : 'primary'" link @click="toggleEditing()" v-if="authorized">
           <font-awesome-icon :icon="['fas', 'pen-to-square']" />
         </el-button>
         <el-button type="primary" link>
           <font-awesome-icon :icon="['fas', 'expand']" @click="toggleFullscreen()" />
         </el-button>
-        <el-button type="primary" link @click="removePage()">
+        <el-button type="primary" link @click="removePage()" v-if="authorized">
           <font-awesome-icon :icon="['fas', 'trash-can']" />
         </el-button>
       </div>
