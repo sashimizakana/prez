@@ -2,6 +2,7 @@
 import { ref, Ref, computed, watch } from "vue";
 import { usePresentationStore, Presentation } from "@/store/presentation";
 import { ElMessage } from "element-plus";
+import router from "@/router";
 export interface Props {
   modelValue?: Presentation;
 }
@@ -21,13 +22,17 @@ const dialogVisible = computed({
 const name: Ref<string> = ref("");
 const presentationStore = usePresentationStore();
 async function save() {
+  let newPresentation: Presentation | null = null;
   if (isNew.value) {
-    await presentationStore.create({ id: null, name: name.value, data: {} });
+    newPresentation = await presentationStore.create({ id: null, name: name.value, data: {} });
   } else {
     await presentationStore.save({ id: props.modelValue!.id, name: name.value }, true);
   }
   ElMessage("Saved");
   dialogVisible.value = false;
+  if (newPresentation) {
+    router.push({ name: "presentation", params: { id: newPresentation.id } });
+  }
 }
 watch(dialogVisible, (value) => {
   if (value) {

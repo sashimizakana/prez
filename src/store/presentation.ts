@@ -50,13 +50,14 @@ export const usePresentationStore = defineStore("presentation", {
     setCursor(cursor: boolean) {
       this.cursor = cursor;
     },
-    async create(params: Presentation) {
+    async create(params: Presentation): Promise<Presentation> {
       const clientStore = useClientStore();
       const { data } = await clientStore.client!.post(
         "/api/presentations",
         params
       );
       this.presentations.push(data);
+      return data as Presentation;
     },
     async save(params: Presentation, replace = false) {
       const clientStore = useClientStore();
